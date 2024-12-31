@@ -31,10 +31,5 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 
 
 ## Workflow Overview
-drag & drop screenshots here or use imgur and reference them using imgsrc
-
-Every screenshot should have some text explaining what the screenshot is about.
-
-Example below.
-
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshot%202024-12-23%20132100.png?raw=true)
 *Ref 1: Network Diagram*
