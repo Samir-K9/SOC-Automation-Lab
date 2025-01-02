@@ -170,10 +170,11 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
   ``` 
   nano /etc/thehive/application.conf
   ```
- - Change database and index configurations hostnames to Public IP of TheHive (178.128.228.152)
- - Change cluster-name to same as Cassandra if changed (Test Cluster)
- - Change application.baseURL to Public IP of TheHive (http://178.128.228.152:9000)
-- **Start and enable TheHive and check status.**
+   - Change database and index configurations hostnames to Public IP of TheHive (178.128.228.152)
+   - Change cluster-name to same as Cassandra if changed (Test Cluster)
+    - Change application.baseURL to Public IP of TheHive (http://178.128.228.152:9000)
+  
+- **Start and enable TheHive and check status.** 
   ``` 
   systemctl start thehive
   systemctl enable thehive
