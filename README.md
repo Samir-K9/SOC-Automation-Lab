@@ -51,8 +51,8 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 - **Verify Sysmon is installed by checking Services that are currently running.**
   ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_01_01_2025_19_19_19.png?raw=true)
 
-  ### Step 2 : Build Wazuh Server on Digital Ocean.
- - **Create a new droplet on Digital Ocean to setup the Wazuh Server with following specifications:**
+  ### Step 2 : Build Wazuh Server on DigitalOcean.
+ - **Create a new droplet on DigitalOcean to setup the Wazuh Server with following specifications:**
    - Operating System: Ubuntu 22.04(LTS)x64
    - Droplet Type: Basic
    - CPU Options: Premium Intel(8GB RAM 160GB Storage)
@@ -72,6 +72,93 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
     ```
   - **Copy the username and password and access the Wazuh Web Interface and login with those credentials.**
     ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-01%20201342.png?raw=true)
+
+    ### Step 3 : Build TheHive on DigitalOcean.
+  - **Follow all the same steps on DigitalOcean to host TheHive same as Wazuh and add the same firewall rules to the droplet.**
+  - **Connect to TheHive by using SSH and install pre-requisites.**
+    - Install dependencies
+      ```
+      apt install wget gnupg apt-transport-https git ca-certificates ca-certificates-java curl  software-properties-common python3-pip lsb-release
+      ```
+    - Install Java
+      ```
+      wget -qO- https://apt.corretto.aws/corretto.key | sudo gpg --dearmor  -o /usr/share/keyrings/corretto.gpg
+      echo "deb [signed-by=/usr/share/keyrings/corretto.gpg] https://apt.corretto.aws stable main" |  sudo tee -a /etc/apt/sources.list.d/corretto.sources.list
+      sudo apt update
+      sudo apt install java-common java-11-amazon-corretto-jdk
+      echo JAVA_HOME="/usr/lib/jvm/java-11-amazon-corretto" | sudo tee -a /etc/environment 
+      export JAVA_HOME="/usr/lib/jvm/java-11-amazon-corretto"
+      ```
+    - Install Cassandra
+      ```
+      wget -qO -  https://downloads.apache.org/cassandra/KEYS | sudo gpg --dearmor  -o /usr/share/keyrings/cassandra-archive.gpg
+      echo "deb [signed-by=/usr/share/keyrings/cassandra-archive.gpg] https://debian.cassandra.apache.org 40x main" |  sudo tee -a 
+      /etc/apt/sources.list.d/cassandra.sources.list
+      sudo apt update
+      sudo apt install cassandra
+      ```
+    - Install ElasticSearch
+       ```
+      wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch |  sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+      sudo apt-get install apt-transport-https
+      echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" |  sudo tee 
+      /etc/apt/sources.list.d/elastic-7.x.list
+      sudo apt update
+      sudo apt install elasticsearch
+      ```
+    - Optional ElasticSearch Configuration : Create a jvm.options file under /etc/elasticsearch/jvm.options.d and put the following configurations in that file.
+      ```
+      Dlog4j2.formatMsgNoLookups=true
+      Xms2g
+      Xmx2g
+      ```
+    - Install TheHive
+        ```
+      wget -O- https://archives.strangebee.com/keys/strangebee.gpg | sudo gpg --dearmor -o /usr/share/keyrings/strangebee-archive-keyring.gpg
+      echo 'deb [signed-by=/usr/share/keyrings/strangebee-archive-keyring.gpg] https://deb.strangebee.com thehive-5.2 main' | sudo tee -a 
+      /etc/apt/sources.list.d/strangebee.list
+      sudo apt-get update
+      sudo apt-get install -y thehive
+      ```
+- **Configure Cassandra by modifying the following file:**
+     ```
+     nano /etc/cassandra/cassandra.yaml
+     ```
+  - Change listen_address to Public IP of TheHive (178.128.228.152)
+  - Change rpc_address to Public IP of TheHive (178.128.228.152)
+  - Change seeds to Public IP of TheHive (178.128.228.152:7000)
+
+- **Stop Cassandra Service:**
+     ```
+     systemctl stop cassandra.service
+     ```
+- **Remove old files from Cassandra as it was used to install TheHive.**
+     ```
+     rm -rf /var/lib/cassandra/*
+     ```
+- **Restart Cassandra and check status.**
+     ```
+     systemctl start cassandra.service
+     systemctl status cassandra.service
+     ```
+- **Setup ElasticSearch by modifying the following file.**
+  ```
+  nano /etc/elasticsearch/elasticsearch.yml
+   ```
+  - Remove the comment and change cluster.name to thehive
+  - Remove the comment for node.name
+  - Remove the comment and change network.host to Public IP of TheHive (178.128.228.152)
+  - Remove the comment from cluster.initial_master_nodes and remove node-2
+  - 
+  
+     
+     
+     
+  
+  
+       
+      
+
     
     
 
