@@ -42,7 +42,7 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 - **Response Automation:** Analysts will select appropriate response actions in Shuffle, which then orchestrates the execution of these actions on the Wazuh agent through the Wazuh manager.
 
 ## Steps 
-### Step 1 : Install Windows 10 on VMware along with Sysmon.**
+### Step 1 : Install Windows 10 on VMware along with Sysmon.
 - **Install Windows 10 on VMware and download Sysmon.**
 - **Download Sysmon configuration file from [Sysmon Modular Config](https://github.com/olafhartong/sysmon-modular)**
 - **Extract files from downloaded Sysmon Zip file and place the configuration file in the same directory.**
@@ -50,6 +50,30 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
   ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_01_01_2025_19_18_41.png?raw=true)
 - **Verify Sysmon is installed by checking Services that are currently running.**
   ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_01_01_2025_19_19_19.png?raw=true)
+
+  ### Step 2 : Build Wazuh Server on Digital Ocean.
+ - **Create a new droplet on Digital Ocean to setup the Wazuh Server with following specifications:**
+   - Operating System: Ubuntu 22.04(LTS)x64
+   - Droplet Type: Basic
+   - CPU Options: Premium Intel(8GB RAM 160GB Storage)
+   - Password: (Create our own root password)
+   - Hostname: Wazuh
+  - **Setup firewall by selecting Networking on the left-hand side and click on Firewalls tab.**
+  - **Modify Inbound firewall rules to only allow access from our own Public IP address by adding our address in the source.**
+    ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-01%20194539.png?raw=true)
+  - **Apply new firewall rules to the Wazuh Server by adding Wazuh droplet to the firewall.**
+    ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-01%20195931.png?raw=true)
+  - **Connect to the Wazuh Server by using SSH and run the following commands to update and upgrade the system and install Wazuh:**
+    ```
+    sudo apt-get update && sudo apt-get upgrade
+    ```
+    ```
+    curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
+    ```
+  - **Copy the username and password and access the Wazuh Web Interface and login with those credentials.**
+    ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-01%20201342.png?raw=true)
+    
+    
 
 
 
