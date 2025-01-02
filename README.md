@@ -180,8 +180,18 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
   systemctl enable thehive
   systemctl status thehive
   ```
-     
+- **Navigate to the public IP of TheHive with port 9000 (http://178.128.228.152:9000) and login with these credentials:**
+  ``` 
+  Username: admin@thehive.local
+  Password: secret
+  ```
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20140920.png?raw=true)
 
+### Step 3 : Configure Wazuh.
+- **Login to the Wazuh Manager and add a Windows Agent with Server address with Public IP of the Wazuh Server.**
+- **Assign an agent name and copy the installation commands.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20142048.png?raw=true)
+- **Open Windows 10 on your VMware and run Powershell with administrative priviledges and paste the installation commands and run it.**
   
 
 
