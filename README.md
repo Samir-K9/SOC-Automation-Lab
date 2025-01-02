@@ -148,8 +148,42 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
   - Remove the comment and change cluster.name to thehive
   - Remove the comment for node.name
   - Remove the comment and change network.host to Public IP of TheHive (178.128.228.152)
+  - Remove the comment from http.port
   - Remove the comment from cluster.initial_master_nodes and remove node-2
-  - 
+
+- **Start and enable ElasticSearch and check its status.**
+  ```
+  systemctl start elasticsearch
+  systemctl enable elasticsearch
+  systemctl status elasticsearch
+   ```
+- **Make sure thehive user and group have access to certain file paths.**
+- thehive needs access to this file path.
+  ```
+  ls -la /opt/thp
+  ```
+- If root has access to thehive directory, change it using the following command:
+ ```
+ chown -R thehive:thehive /opt/thp
+ ```
+- **Configure thehive configuration file.**
+  ``` 
+  nano /etc/thehive/application.conf
+  ```
+ - Change database and index configurations hostnames to Public IP of TheHive (178.128.228.152)
+ - Change cluster-name to same as Cassandra if changed (Test Cluster)
+ - Change application.baseURL to Public IP of TheHive (http://178.128.228.152:9000)
+- **Start and enable TheHive and check status.**
+  ``` 
+  systemctl start thehive
+  systemctl enable thehive
+  systemctl status thehive
+  ```
+     
+
+  
+
+
   
      
      
