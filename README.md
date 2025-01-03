@@ -241,6 +241,50 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 - **The custom rule will trigger an alert in Wazuh for mimikatz even when we rename the file.**
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20230354.png?raw=true)
 
+  ### Step 5: Connect Shuffle(SOAR) and send alert to TheHive and email to the SOC Analyst.
+- **Go to shuffler.io and create an account in Shuffle.**
+- **Click on "New Workflow" and create a new workflow with SOC Automation Lab as name and any random use case.**
+- **Add a Webhook Trigger by clicking on "Triggers" on the bottom left  and connect it to "Change Me" node. Set a name for the webhook and copy the Webhook URI from the right side.**
+    ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20140830.png?raw=true)
+- **Click on "Change Me" node and set it to "Repeat back to me" mode. For call options, select "Execution argument". Save the workflow.**
+- **SSH to Wazuh Manager and modify the following file:**
+    ``` 
+    nano /var/ossec/etc/ossec.conf
+    ```
+    - Add this integration into the file:
+    ``` 
+    <integration>
+    <name>shuffle</name>
+    <hook_url>https://shuffler.io/api/v1/hooks/webhook_0af8a049-f2cb-420b-af58-5ebc3c40c7df</hook_url>
+    <level>3</level>
+    <alert_format>json</alert_format>
+    </integration>
+    ```
+     - Make these changes to the integration file:
+    ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20123212.png?raw=true)
+
+     - Restart the Wazuh Manager Service
+    ``` 
+    systemctl restart wazuh-manager.service
+    ```
+  - **Execute Mimikatz on Windows 10 Client machine and there should be some events in Shuffle.  In Shuffle, click on the webhook trigger ("Wazuh-Alerts") and click "Start".**
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20130048.png?raw=true)
+- **Creating Mimikatz Workflow:**
+   - Mimikatz Alert sent to Shuffle.
+   - Shuffle receives the alert and extracts file hash SHA256.
+   - Check reputation score using VirusTotal.
+   - Send details to TheHive to create alert.
+   - Send email to the SOC Analyst to start investigation.
+- **To automate the workflow, we need to parsh out the hash value.Click on the "Change Me" node and select "Regex capture group" instead of "Repeat back to me". In the "Input data", select the "hashes" option. In the "Regex" tab, enter the regex pattern to parse the SHA256 hash value: `SHA256=([A-Fa-f0-9]{64})`. Rename Change Me to SHA256_Regex and save the workflow.**
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20131514.png?raw=true)
+- **Go to the VirusTotal website, create an account and copy the API key.**
+- **In Shuffle, click on the "Apps" tab and search for "VirusTotal". Drag the "VirusTotal" app to the workflow, and it will automatically connect.**
+- **Click on VirusTotal and paste your API key to authenticate. Change "Find Actions" to "Get a Hash Report" and Change the "ID" field to the "SHA256_Regex" value created earlier.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20132319.png?raw=true)
+
+
+     
+
   
      
      
