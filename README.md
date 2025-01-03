@@ -332,6 +332,12 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20160513.png?raw=true)
 - **Finally, save the workflow and rerun it. Now there should be an email sent to the address with the alert details.**
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20160848.png?raw=true)
+## Conclusion
+We have built and configured the SOC Automation Lab, integrating Wazuh, TheHive, and Shuffle to automate event monitoring, alerting, and incident response. This setup lays a strong foundation for further customization and expansion of automation workflows to better align with our specific SOC needs.Through this lab, we have gained practical experience in implementing an automated SOC workflow using robust open-source tools. This knowledge now enables us to enhance your organization's security operations, accelerate incident response times, and optimize SOC processes.
+
+## References
+- https://www.youtube.com/@MyDFIR
+
 
 
      
