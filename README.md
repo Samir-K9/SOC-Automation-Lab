@@ -202,7 +202,15 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 
 ### Step 4: Generate Telemetry and Ingest into Wazuh
 - **On the Windows 10 machine, open ossec.conf with administrative priviledges. Navigate to C:\Program Files (x86)\ossec-agent\ossec.conf to find the file.**
-- **Remove the Application, Security, and System sections and for this project. Only Sysmon events will be ingested to Wazuh by making the following changes:**
+- **Remove the Application, Security, and System sections for this project. Only Sysmon events will be ingested to Wazuh by making the following changes:**
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_02_01_2025_21_42_04.png?raw=true)
+- **Save the ossec.conf file and restart Wazuh under Services.**
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_02_01_2025_21_45_55.png?raw=true)
+- **Download Mimikatz by temporarily disabling Windows Defender or exclude the download directory from scanning.**
+- **After Mimikatz is successfully downloaded, open Powershell and change to Mimikatz's directory and execute it.**
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_02_01_2025_21_55_42.png?raw=true)
+- **
+  
   
   
 
