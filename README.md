@@ -158,14 +158,14 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
   systemctl status elasticsearch
    ```
 - **Make sure thehive user and group have access to certain file paths.**
-- thehive needs access to this file path.
+  - thehive needs access to this file path.
   ```
   ls -la /opt/thp
   ```
-- If root has access to thehive directory, change it using the following command:
- ```
- chown -R thehive:thehive /opt/thp
- ```
+  - If root has access to thehive directory, change it using the following command:
+  ```
+  chown -R thehive:thehive /opt/thp
+  ```
 - **Configure thehive configuration file.**
   ``` 
   nano /etc/thehive/application.conf
@@ -231,9 +231,9 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 -  **Execute Mimikatz in Windows 10 machine and the logs should appear in our index**
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20222437.png?raw=true)
 - **Create a custom rule from Wazuh dashboard using `originalFileName` field to ensure the alert will trigger even if an attacker changes the Mimikatz executable name.**
- - Under Management select Rules and go to Manage Rule Files and find the Sysmon rules. These are Sysmon-specific rules built into Wazuh for event ID 1. Copy one of these rules as a reference and modify it to create a custom Mimikatz detection rule.
+  - Under Management select Rules and go to Manage Rule Files and find the Sysmon rules. These are Sysmon-specific rules built into Wazuh for event ID 1. Copy one of these rules as a reference and modify it to create a custom Mimikatz detection rule.
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20224115.png?raw=true)
-- Go to the "Custom rules" button and edit the "local_rules.xml" file. Paste the rule and make these changes.
+  - Go to the "Custom rules" button and edit the "local_rules.xml" file. Paste the rule and make these changes.
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20224506.png?raw=true)
 
 - **Test the rule by renaming mimikatz.exe to potato.exe and execute it.**
@@ -267,7 +267,7 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
     ``` 
     systemctl restart wazuh-manager.service
     ```
-  - **Execute Mimikatz on Windows 10 Client machine and there should be some events in Shuffle.  In Shuffle, click on the webhook trigger ("Wazuh-Alerts") and click "Start".**
+- **Execute Mimikatz on Windows 10 Client machine and there should be some events in Shuffle.  In Shuffle, click on the webhook trigger ("Wazuh-Alerts") and click "Start".**
   ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20130048.png?raw=true)
 - **Creating Mimikatz Workflow:**
    - Mimikatz Alert sent to Shuffle.
