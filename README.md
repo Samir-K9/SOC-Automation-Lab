@@ -33,7 +33,7 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 
 ## Workflow Overview
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202024-12-23%20132100.png?raw=true)
-*Ref 1: Network Diagram*
+
 
 - **Telemetry Generation:** Mimikatz will be initiated on Windows 10 VM to simulate malicious behaviour which will generate telemetry data that will be captured by Sysmon.
 - **Alert Generation:** Sysmon data is ingested by the Wazuh agent, which then forwards it to the Wazuh server. Alerts are then generated based on pre-set rules and configurations.
