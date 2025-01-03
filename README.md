@@ -283,6 +283,56 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20132319.png?raw=true)
 - **Save the workflow and rerun it. VirusTotal will return some output with number of malicious detections.**
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20132940.png?raw=true)
+- **Search for TheHive in Apps and drag it over to the workflow.**
+- **Head over to TheHive and login with these default credentials:**
+   ``` 
+   Username: admin@thehive.local
+   Password: secret
+    ```
+- **Once logged in,create a new organization.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20143716.png?raw=true)
+- **Add users to this newly created organization. Add one analyst account and one for SOAR. For analyst account create a login: `samir@test.com`**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20152814.png?raw=true)
+- **Set password for the analyst account and create an API for SOAR and copy it.**
+![Image Alt](![image](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20144419.png?raw=true)
+- **Logout of TheHive and login again using your user account.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20145010.png?raw=true)
+-**Go to Shuffle and click on "TheHive1" node and then click on "Authenticate TheHive" button and enter the API key created earlier. For the URL, enter the public IP address of TheHive along with the port number and hit Submit.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20145720.png?raw=true)
+- **Under "Find actions", click on "TheHive" and select "Create alerts". Click on Advanced and edit the body with the following JSON payload:**
+ ``` 
+  {
+  "description": "Mimikatz Detected on host:",
+  "externallink": "",
+  "flag": false,
+  "pap": 2,
+  "severity": "2",
+  "source": "Wazuh",
+  "sourceRef": "Rule:100002",
+  "status": "New",
+  "summary": "Details about the Mimikatz detection",
+  "tags": [
+    "T1003"
+  ],
+  "title": "Mimikatz Detection Alert",
+  "tlp": 2,
+  "type": "Internal"
+}
+```
+- **Save the workflow.On DigitalOcean add a custom firewall rule to allow all traffic on port 9000.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20154257.png?raw=true)
+- **Rerun the workflow and an alert should popup on TheHive if everything is working properly.(Note: We can customize the JSON payload to get more information as needed about the alert.)**
+  
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20161102.png?raw=true)
+
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20161032.png?raw=true)
+
+- **To send an email notification about the alert to the SOC Analyst, go to Shuffle and search for "Email" under "Apps". Drag it to the workflow and connect it to VirusTotal.**
+- **Configure the email settings, including the recipient, subject, and body, to send the alert with relevant event information.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20160513.png?raw=true)
+- **Finally, save the workflow and rerun it. Now there should be an email sent to the address with the alert details.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20160848.png?raw=true)
+
 
      
 
