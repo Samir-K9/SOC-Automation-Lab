@@ -192,6 +192,18 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 - **Assign an agent name and copy the installation commands.**
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20142048.png?raw=true)
 - **Open Windows 10 on your VMware and run Powershell with administrative priviledges and paste the installation commands and run it.**
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_02_01_2025_20_38_20.png?raw=true)
+- **Start the Wazuh Service using the command:**
+  ``` 
+  net start wazuhsvc
+  ```
+- **Check Wazuh is running by going to Services in Start Menu and see if you have one active agent in Wazuh Manager.**
+  ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20205252.png?raw=true)
+
+### Step 4: Generate Telemetry and Ingest into Wazuh
+- **On the Windows 10 machine, open ossec.conf with administrative priviledges. Navigate to C:\Program Files (x86)\ossec-agent\ossec.conf to find the file.**
+- **Remove the Application, Security, and System sections and for this project. Only Sysmon events will be ingested to Wazuh by making the following changes:**
+  
   
 
 
