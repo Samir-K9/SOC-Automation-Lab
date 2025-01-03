@@ -281,7 +281,8 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 - **In Shuffle, click on the "Apps" tab and search for "VirusTotal". Drag the "VirusTotal" app to the workflow, and it will automatically connect.**
 - **Click on VirusTotal and paste your API key to authenticate. Change "Find Actions" to "Get a Hash Report" and Change the "ID" field to the "SHA256_Regex" value created earlier.**
 ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20132319.png?raw=true)
-
+- **Save the workflow and rerun it. VirusTotal will return some output with number of malicious detections.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-03%20132940.png?raw=true)
 
      
 
