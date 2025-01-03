@@ -209,11 +209,37 @@ The SOC Automation Lab project has been crucial in strengthening my understandin
 - **Download Mimikatz by temporarily disabling Windows Defender or exclude the download directory from scanning.**
 - **After Mimikatz is successfully downloaded, open Powershell and change to Mimikatz's directory and execute it.**
   ![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_02_01_2025_21_55_42.png?raw=true)
-- **
-  
-  
-  
+- **Configure Wazuh to log this event by making some changes:**
+  - Connect to Wazuh Server via SSH and make changes to ossec.conf file by using the following command:
+     ``` 
+     nano /var/ossec/etc/ossec.conf
+     ```
+  - Change the <logall> and <logall_json> from no to yes.
+  - Restart the Wazuh Manager Service.
+     ``` 
+     systemctl restart wazuh-manager.service
+     ```
+   - Make changes to FIlebeat as logs are saved in archives and need to be ingested.
+     ``` 
+     nano /etc/filebeat/filebeat.yml
+     ```
+   - Change the enabled: false to true, save the file and restart Filebeat.
+     ``` 
+     systemctl restart filebeat
+     ```
+- **Go to Wazuh dashboard and create new index called `wazuh-archives-*`.From the left-side menu, go to "Stack Management" > "Index Management" to create this index with timestamp as time field.**
+-  **Execute Mimikatz in Windows 10 machine and the logs should appear in our index**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20222437.png?raw=true)
+- **Create a custom rule from Wazuh dashboard using `originalFileName` field to ensure the alert will trigger even if an attacker changes the Mimikatz executable name.**
+ - Under Management select Rules and go to Manage Rule Files and find the Sysmon rules. These are Sysmon-specific rules built into Wazuh for event ID 1. Copy one of these rules as a reference and modify it to create a custom Mimikatz detection rule.
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20224115.png?raw=true)
+- Go to the "Custom rules" button and edit the "local_rules.xml" file. Paste the rule and make these changes.
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20224506.png?raw=true)
 
+- **Test the rule by renaming mimikatz.exe to potato.exe and execute it.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/VirtualBox_Demo_02_01_2025_22_52_45.png?raw=true)
+- **The custom rule will trigger an alert in Wazuh for mimikatz even when we rename the file.**
+![Image Alt](https://github.com/Samir-K9/SOC-Automation-Lab/blob/main/Screenshots/Screenshot%202025-01-02%20230354.png?raw=true)
 
   
      
