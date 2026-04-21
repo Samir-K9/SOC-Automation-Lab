@@ -449,7 +449,3 @@ systemctl restart wazuh-manager.service
 We have built and configured the SOC Automation Lab, integrating Wazuh, TheHive, and Shuffle to automate event monitoring, alerting, and incident response. This setup lays a strong foundation for further customization and expansion of automation workflows to better align with our specific SOC needs. Through this lab, we have gained practical experience in implementing an automated SOC workflow using robust open-source tools. This knowledge now enables us to enhance your organization's security operations, accelerate incident response times, and optimize SOC processes.
 
 ---
-
-## References
-
-- https://www.youtube.com/@MyDFIR
